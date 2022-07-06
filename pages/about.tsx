@@ -1,13 +1,11 @@
-import { GetStaticProps, NextPage, InferGetStaticPropsType } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 
-type Post = {
-  id: string
-  title: string
-}
+import Navbar from '../components/Navbar'
 
-const About: NextPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const About: NextPage<AboutProps> = ({ posts }) => {
   return (
     <div>
+      <Navbar />
       <h1>About</h1>
       {posts.map((post: Post) => (
         <div key={post.id}>
@@ -18,7 +16,16 @@ const About: NextPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProp
   )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+interface AboutProps {
+  posts: Post[]
+}
+
+type Post = {
+  id: string
+  title: string
+}
+
+export const getStaticProps: GetStaticProps = () => {
   const posts: Post[] = [
     { id: '1', title: 'Pineapple Smoothie' },
     { id: '2', title: 'Recipe 2' },

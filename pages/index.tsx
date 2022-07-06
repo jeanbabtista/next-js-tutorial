@@ -1,19 +1,38 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import { GetStaticProps } from 'next'
+import { NextPage, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 
-const Home: NextPage = () => {
+import Navbar from '../components/Navbar'
+import urls from '../utils/navlinks'
+
+const Home: NextPage<HomeProps> = ({ recipes }) => {
+  const router = useRouter()
+
+  const handleClick = () => {
+    console.log('placing order')
+    router.push(urls.products())
+  }
+
   return (
     <div>
-      <Head>
-        <title>Create Next App</title>
-      </Head>
-      <main>
-        <p>Hello World</p>
-      </main>
-      <footer>Footer</footer>
+      <Navbar />
+      <h1>Home Page</h1>
+      <ul>
+        {recipes.map((recipe) => (
+          <li key={recipe.id}>{recipe.title}</li>
+        ))}
+      </ul>
+      <button onClick={handleClick}>Place Order</button>
     </div>
   )
+}
+
+interface HomeProps {
+  recipes: Recipe[]
+}
+
+interface Recipe {
+  id: string | number
+  title: string
 }
 
 // exporting this function enables static site generation (SSG),
@@ -21,9 +40,10 @@ const Home: NextPage = () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
-      data: {
-        recipes: [{ title: 'Pineapple Smoothie' }, { title: 'Recipe 2' }],
-      },
+      recipes: [
+        { id: 1, title: 'Pineapple Smoothie' },
+        { id: '2', title: 'Banana Shake' },
+      ],
     },
   }
 }
