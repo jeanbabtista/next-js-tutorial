@@ -3,8 +3,15 @@
  * all errors. It's Next.js specific name.
  */
 
+import Navbar from '../components/Navbar'
+
 const ErrorPage = () => {
-  return <h1>ErrorPage</h1>
+  return (
+    <div>
+      <Navbar />
+      <h1>ErrorPage</h1>
+    </div>
+  )
 }
 
 export default ErrorPage
