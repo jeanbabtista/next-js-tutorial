@@ -1,2 +1,2 @@
-export * from './IUser'
-export * from './IUserComponentProps'
+export * from './user'
+export * from './posts'

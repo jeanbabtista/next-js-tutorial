@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import React from 'react'
-import Navbar from '../../../components/Navbar'
+import Navbar from '../../../components/navbar'
 
 const Product: NextPage = () => {
   const { productId } = useRouter().query

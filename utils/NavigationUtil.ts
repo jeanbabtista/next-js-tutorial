@@ -19,7 +19,7 @@ class NavigationUtil {
   }
 
   getNavbarLinksArray() {
-    return [this.getHomeUrl(), this.getAboutUrl(), this.getProductsUrl(), this.getDocsUrl(), this.getUsersUrl()]
+    return [this.getHomeUrl(), this.getAboutUrl(), this.getProductsUrl(), this.getDocsUrl(), this.getUsersUrl(), this.getPostsUrl()]
   }
 
   getHomeUrl() {
@@ -34,11 +34,11 @@ class NavigationUtil {
     return this.getReturnType('product', 'Products')
   }
 
-  getProductByIdUrl(id: string) {
+  getProductByIdUrl(id: string | number) {
     return this.getReturnType(`product/${id}`, `Product ${id}`)
   }
 
-  getProductByIdReviewsUrl(id: string) {
+  getProductByIdReviewsUrl(id: string | number) {
     return this.getReturnType(`product/${id}/review`, `Product ${id} Reviews`)
   }
 
@@ -64,6 +64,14 @@ class NavigationUtil {
 
   getUsersUrl() {
     return this.getReturnType('user', 'Users')
+  }
+
+  getPostsUrl() {
+    return this.getReturnType('post', 'Posts')
+  }
+
+  getPostByIdUrl(id: string | number) {
+    return this.getReturnType(`post/${id}`, `Post ${id}`)
   }
 }
 

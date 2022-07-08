@@ -1,11 +1,12 @@
 import { GetStaticProps, NextPage } from 'next'
 
-import Navbar from '../components/Navbar'
-import User from '../components/User'
+import Navbar from '../components/navbar'
+import User from '../components/user'
 
-import { IUser } from '../types'
+import { IUser, IUsersPageProps } from '../types'
+import NextUtil from '../utils/NextUtil'
 
-const Users: NextPage<UsersPageProps> = ({ users }) => {
+const Users: NextPage<IUsersPageProps> = ({ users }) => {
   return (
     <div>
       <Navbar />
@@ -17,18 +18,12 @@ const Users: NextPage<UsersPageProps> = ({ users }) => {
 
 export default Users
 
-interface UsersPageProps {
-  users: IUser[]
-}
-
 export const getStaticProps: GetStaticProps = async () => {
-  const getProps = (users: IUser[] = []) => ({ props: { users } })
-
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/users')
     const users = await response.json()
-    return getProps(users)
+    return NextUtil.getStaticProps('users', users)
   } catch (e) {
-    return getProps()
+    return NextUtil.getStaticProps('users', [])
   }
 }

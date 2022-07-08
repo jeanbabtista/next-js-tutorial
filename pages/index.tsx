@@ -1,7 +1,7 @@
 import { NextPage, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
-import Navbar from '../components/Navbar'
+import Navbar from '../components/navbar'
 import NavigationUtil from '../utils/NavigationUtil'
 
 const Home: NextPage = () => {

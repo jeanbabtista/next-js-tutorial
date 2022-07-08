@@ -11,7 +11,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import React from 'react'
-import Navbar from '../../components/Navbar'
+import Navbar from '../../components/navbar'
 
 const Documentation: NextPage = () => {
   const { params } = useRouter().query

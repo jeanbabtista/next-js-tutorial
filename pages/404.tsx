@@ -3,7 +3,7 @@
  * all errors. It's Next.js specific name.
  */
 
-import Navbar from '../components/Navbar'
+import Navbar from '../components/navbar'
 
 const ErrorPage = () => {
   return (
