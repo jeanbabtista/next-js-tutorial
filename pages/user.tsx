@@ -4,6 +4,7 @@ import Navbar from '../components/navbar'
 import User from '../components/user'
 
 import { IUser, IUsersPageProps } from '../types'
+import ApiUtil from '../utils/ApiUtil'
 import NextUtil from '../utils/NextUtil'
 
 const Users: NextPage<IUsersPageProps> = ({ users }) => {
@@ -19,11 +20,9 @@ const Users: NextPage<IUsersPageProps> = ({ users }) => {
 export default Users
 
 export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users')
-    const users = await response.json()
-    return NextUtil.getStaticProps('users', users)
-  } catch (e) {
-    return NextUtil.getStaticProps('users', [])
-  }
+  const [e, message, users] = await ApiUtil.getUsers()
+  console.log(message)
+
+  if (e) return NextUtil.getStaticProps('users', [] as IUser[])
+  return NextUtil.getStaticProps('users', users)
 }

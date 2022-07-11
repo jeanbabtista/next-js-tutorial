@@ -10,16 +10,24 @@ class NavigationUtil {
     return `${this.baseUrl}${link}`
   }
 
-  private getReturnType(url: string, label: string) {
-    return { url: this.getUrl(url), label } as NavLinkType
+  private getReturnType(url: string, label: string): NavLinkType {
+    return { url: this.getUrl(url), label }
   }
 
-  constructor() {
-    this.baseUrl = '/'
+  constructor(baseUrl = '/') {
+    this.baseUrl = baseUrl
   }
 
   getNavbarLinksArray() {
-    return [this.getHomeUrl(), this.getAboutUrl(), this.getProductsUrl(), this.getDocsUrl(), this.getUsersUrl(), this.getPostsUrl()]
+    return [
+      this.getHomeUrl(),
+      this.getAboutUrl(),
+      this.getProductsUrl(),
+      this.getDocsUrl(),
+      this.getUsersUrl(),
+      this.getPostsUrl(),
+      this.getNewsUrl(),
+    ]
   }
 
   getHomeUrl() {
@@ -72,6 +80,14 @@ class NavigationUtil {
 
   getPostByIdUrl(id: string | number) {
     return this.getReturnType(`post/${id}`, `Post ${id}`)
+  }
+
+  getNewsUrl() {
+    return this.getReturnType('news', 'News')
+  }
+
+  getNewsBySearchQuery(query: string) {
+    return this.getReturnType(`news/${query}`, `News ${query}`)
   }
 }
 
