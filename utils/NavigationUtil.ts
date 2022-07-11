@@ -27,6 +27,9 @@ class NavigationUtil {
       this.getUsersUrl(),
       this.getPostsUrl(),
       this.getNewsUrl(),
+      this.getClientUrl(),
+      this.getSWRUrl(),
+      this.getSWRCombinedUrl(),
     ]
   }
 
@@ -66,10 +69,6 @@ class NavigationUtil {
     return this.getReturnType(`docs/${feature}/${concept}`, `Docs ${feature} ${concept}`)
   }
 
-  getContactUrl() {
-    return this.getReturnType('contact', 'Contact')
-  }
-
   getUsersUrl() {
     return this.getReturnType('user', 'Users')
   }
@@ -88,6 +87,18 @@ class NavigationUtil {
 
   getNewsBySearchQuery(query: string) {
     return this.getReturnType(`news/${query}`, `News ${query}`)
+  }
+
+  getClientUrl() {
+    return this.getReturnType('client', 'CSR')
+  }
+
+  getSWRUrl() {
+    return this.getReturnType('swr', 'SWR')
+  }
+
+  getSWRCombinedUrl() {
+    return this.getReturnType('swr/combined', 'CSR and SSR combined')
   }
 }
 

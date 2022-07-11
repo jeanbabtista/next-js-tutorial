@@ -92,6 +92,24 @@ Optional parameter is *context*, which we can destructure and access *params*, *
 
 This enables us to render pages using plain React. For example, we can use *useEffect* hook to fetch data from the server and render it on the client. However, we usually have some state, like *isLoading*, which will be rendered initially (we usually put in some text, like *Loading ...*), untill the data is fetched. Because this is the initial state of our page, Next.js will server HTML with response *Loading ...* every time, and all the data from *useEffect* will be fetched via client. This enables us to achieve real-time functionality, but it is very bad for SEO.
 
+On the other hand, some pages require not to be pre-rendered, such as user profiles which are available only to users themselves. In this case, CSR is preferable.
+
+There are also some events that would ideally be triggered on client side, such as filtering and pagination.
+
+### SWR hooks
+
+> Implementation can be found in `pages/swr` page. You also need to run `npm i swr`.
+
+While deploying Next.js, Vercel created a custom library for updating state of our app, called *SWR* (Stale While Revalidate). It handles caching, revalidation, focus tracking, refetching on interval, ...
+
+The point of this library is to never use React hooks again, but use SWR hooks to simplify the process and not worry about the implementation of React hooks.
+
+### Combining pre-rendering and CSR
+
+> Implementation can be found in `pages/combined` page.
+
+Let's take filtering as an example. Ideally, we want to filter the data on the client side, but we need to fetch the data from the server. We can achieve this by using for example *getServerSideProps* on the server side and *useSWR* on the client side to filter data. The bad thing is that the URL will be the same for unfiltered data and for filtered data, therefore we cannot share it with a friend. To resolve this issue, we can use shallow routing, which enables us to change the URL without running data fetching methods again, like *getServerSideProps* or *getStaticProps*.
+
 ---
 
 ## Routing
@@ -104,7 +122,12 @@ This enables us to render pages using plain React. For example, we can use *useE
 | */product/:id* | Product details |
 | */product/:id/review* | List of reviews of a product |
 | */product/:id/review/:id* | Review of a product |
-| */docs/*** | Catch-all route, for example */docs/feature1/concept1/example1* and any number of params are captured in a single file |
-| */user/* | Users list |
-| */post/* | Posts list |
+| */docs*** | Catch-all route, for example */docs/feature1/concept1/example1* and any number of params are captured in a single file |
+| */user* | Users list |
+| */post* | Posts list |
 | */post/:id* | Pre-rendered post details |
+| */news* | News list using SSR |
+| */news/:searchQuery* | Filtered news using SSR |
+| */client* | Client-side rendered page |
+| */swr* | SWR hooks from Next.js development team |
+| */swr/combined* | Filtering events using shallow routing and combination of SSR and CSR |
