@@ -1,11 +1,11 @@
 import { GetStaticProps, NextPage } from 'next'
 
-import Navbar from '../components/navbar'
-import User from '../components/user'
+import Navbar from '../../components/navbar'
+import User from '../../components/user'
 
-import { IUser, IUsersPageProps } from '../types'
-import ApiUtil from '../utils/ApiUtil'
-import NextUtil from '../utils/NextUtil'
+import { IUser, IUsersPageProps } from '../../types'
+import ApiUtil from '../../utils/ApiUtil'
+import NextUtil from '../../utils/NextUtil'
 
 const Users: NextPage<IUsersPageProps> = ({ users }) => {
   return (

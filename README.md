@@ -1,5 +1,28 @@
 # Next JS Tutorial
 
+## Routing
+
+| Route | Description |
+| ------ | ----------- |
+| */* | Homepage |
+| */about* | About page |
+| */product* | List of all products |
+| */product/:id* | Product details |
+| */product/:id/review* | List of reviews of a product |
+| */product/:id/review/:id* | Review of a product |
+| */docs*** | Catch-all route, for example */docs/feature1/concept1/example1* and any number of params are captured in a single file |
+| */user* | Users list |
+| */post* | Posts list |
+| */post/:id* | Pre-rendered post details |
+| */news* | News list using SSR |
+| */news/:searchQuery* | Filtered news using SSR |
+| */client* | Client-side rendered page |
+| */swr* | SWR hooks from Next.js development team |
+| */swr/combined* | Filtering events using shallow routing and combination of SSR and CSR |
+| */comments* | Comments API based on Next.js integrated API development |
+
+---
+
 ## Static Generation (SG)
 
 ### SG Overview
@@ -12,7 +35,7 @@
 
 ### 1. function `getStaticProps`
 
-> Implementation can be found in `pages/user.tsx` page.
+> Implementation can be found in `pages/user` page.
 
 Function `getStaticProps` is a function that enables Static Generation (SG) for a page. Runs before build, so we can access data before the page is even compiled. This code is rendered only on server side, so if we log something, it will be seen only here in terminal and not in the browser.
 
@@ -112,22 +135,12 @@ Let's take filtering as an example. Ideally, we want to filter the data on the c
 
 ---
 
-## Routing
+## API development
 
-| Route | Description |
-| ------ | ----------- |
-| */* | Homepage |
-| */about* | About page |
-| */product* | List of all products |
-| */product/:id* | Product details |
-| */product/:id/review* | List of reviews of a product |
-| */product/:id/review/:id* | Review of a product |
-| */docs*** | Catch-all route, for example */docs/feature1/concept1/example1* and any number of params are captured in a single file |
-| */user* | Users list |
-| */post* | Posts list |
-| */post/:id* | Pre-rendered post details |
-| */news* | News list using SSR |
-| */news/:searchQuery* | Filtered news using SSR |
-| */client* | Client-side rendered page |
-| */swr* | SWR hooks from Next.js development team |
-| */swr/combined* | Filtering events using shallow routing and combination of SSR and CSR |
+Next.js is a full stack application. It gives you the benefit of developing frontend React apps as well as backend Node.js apps out of the box.
+
+To enable API support, all code must be inside the `pages/api` directory, which automatically serves JSON. Each page must export `handler` function with request and response objects, same as in Express.js framework.
+
+### Dynamic API routes
+
+Very similar to regular dynamic routes, which are based on files and their hierarchy.

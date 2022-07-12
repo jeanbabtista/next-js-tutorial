@@ -20,6 +20,7 @@ class NavigationUtil {
 
   getNavbarLinksArray() {
     return [
+      this.getApiUrl(),
       this.getHomeUrl(),
       this.getAboutUrl(),
       this.getProductsUrl(),
@@ -30,7 +31,12 @@ class NavigationUtil {
       this.getClientUrl(),
       this.getSWRUrl(),
       this.getSWRCombinedUrl(),
+      this.getCommentsUrl(),
     ]
+  }
+
+  getApiUrl() {
+    return this.getReturnType('api/v1', 'API')
   }
 
   getHomeUrl() {
@@ -99,6 +105,10 @@ class NavigationUtil {
 
   getSWRCombinedUrl() {
     return this.getReturnType('swr/combined', 'CSR and SSR combined')
+  }
+
+  getCommentsUrl() {
+    return this.getReturnType('comments', 'Comments')
   }
 }
 
