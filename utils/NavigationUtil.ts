@@ -33,11 +33,12 @@ class NavigationUtil {
       this.getSWRCombinedUrl(),
       this.getCommentsUrl(),
       this.getImagesUrl(),
+      this.getProtectedRouteUrl(),
     ]
   }
 
   getApiUrl() {
-    return this.getReturnType('api/v1', 'API')
+    return this.getReturnType('api', 'API')
   }
 
   getHomeUrl() {
@@ -114,6 +115,18 @@ class NavigationUtil {
 
   getImagesUrl() {
     return this.getReturnType('images', 'Images')
+  }
+
+  getSignInUrl() {
+    return this.getReturnType('api/auth/signin', 'Sign In')
+  }
+
+  getSignOutUrl() {
+    return this.getReturnType('api/auth/signout', 'Sign Out')
+  }
+
+  getProtectedRouteUrl() {
+    return this.getReturnType('protected', 'Protected Route')
   }
 }
 

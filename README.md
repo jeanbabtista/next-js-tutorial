@@ -184,3 +184,23 @@ You should never call your own Next.js API from within *getStaticProps* or *getS
 - `Configuration files`:
   - Redirects - in our *next.config.js* file we can define redirects, which will redirect users from one url to another. This is very useful when a certain url is under development and we don't want to show it to users.
   - Environment variables - to access environment variables, we have to define them in a file called `.env.local`, and then access them in code with `process.env.MY_VARIABLE`. Next.js automatically populates *process.env* with our environment variables, so we don't have to manually set this up like in Express.js. If we want to expose a variable to the client, we have to name it as `NEXT_PUBLIC_[variableName]`.
+
+---
+
+## Authentication
+
+> Implementation can be found in `pages/auth` page.
+
+### Client side authentication
+
+To enable authentication, we can very easily choose an OAuth provider, which is already implemented by *Next Auth*. We can use it to authenticate users with Facebook, Google, Twitter, GitHub, etc. We just follow along the instructions on the website and setup authentication in `pages/api/auth/[...nextauth].tsx` file. Then, we wrap the whole application inside *SessionProvider* component, which is a wrapper for client side authentication.
+
+To authenticate users on the client side, we simply use *useSession* hook from *Next Auth* and pass it to the component. Follow the instructions on the website for more detailed explanation. We also have functions *signIn* and *signOut* that we can use to sign in and out users from the client side very easily.
+
+### Server Side Authentication
+
+Because we have to have access to every request and determine the session for authentication to work (to render HTML pages beforehand), we can only use server side authentication by implementing *getServerSideProps* function and using *getSession* function, which accepts *context* as a parameter and returns a session object.
+
+We can also redirect users from server side by returning an object with `redirect` property and subproperties `destination` and `permanent`.
+
+To secure API routes, we can also use *getSession* from the same module to determine the session and handle request accordingly.
