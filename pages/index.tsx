@@ -1,7 +1,6 @@
 import { NextPage, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
-import Navbar from '../components/navbar'
 import NavigationUtil from '../utils/NavigationUtil'
 
 const Home: NextPage = () => {
@@ -9,11 +8,11 @@ const Home: NextPage = () => {
   const handleClick = () => router.push(NavigationUtil.getProductsUrl().url)
 
   return (
-    <div>
-      <Navbar />
+    <>
       <h1>Home Page</h1>
       <button onClick={handleClick}>Place Order</button>
-    </div>
+      <p>Environment public ID: {process.env.NEXT_PUBLIC_ID}</p>
+    </>
   )
 }
 

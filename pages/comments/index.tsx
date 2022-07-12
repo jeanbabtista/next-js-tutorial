@@ -1,10 +1,9 @@
-import { NextPage } from 'next'
-
+import { NextPageWithLayout } from '../_app'
 import React, { useState } from 'react'
-
 import { IComment } from '../../types/comment'
+import Layout from '../../components/layout'
 
-const Comments: NextPage = () => {
+const Comments: NextPageWithLayout = () => {
   const [state, setState] = useState({ comments: [] as IComment[], loading: false, postCommentBody: '' })
 
   React.useEffect(() => console.log(state.comments), [state.comments])
@@ -41,7 +40,7 @@ const Comments: NextPage = () => {
   if (state.loading) return <div>Loading...</div>
 
   return (
-    <div>
+    <>
       <h1>Comments</h1>
       <button onClick={handleFetchComments}>Fetch comments from our Next.js API</button>
 
@@ -60,8 +59,14 @@ const Comments: NextPage = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   )
 }
+
+Comments.getLayout = (page: React.ReactElement) => (
+  <Layout title="Comments" description="Comments Page">
+    {page}
+  </Layout>
+)
 
 export default Comments

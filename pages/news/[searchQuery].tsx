@@ -1,8 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next'
 import NextError from 'next/error'
 
-import Navbar from '../../components/navbar'
-
 import NextUtil from '../../utils/NextUtil'
 import { INews, INewsPageProps } from '../../types'
 
@@ -10,8 +8,7 @@ const NewsBySearchQuery: NextPage<INewsPageProps> = ({ news }) => {
   if (!news) return <NextError statusCode={503} title="Unable to fetch news" />
 
   return (
-    <div>
-      <Navbar />
+    <>
       <h1>NewsBySearchQuery</h1>
       <ul>
         {news.map(({ id, title, body }) => (
@@ -21,7 +18,7 @@ const NewsBySearchQuery: NextPage<INewsPageProps> = ({ news }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   )
 }
 

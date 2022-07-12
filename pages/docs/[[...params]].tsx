@@ -10,46 +10,27 @@
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import React from 'react'
-import Navbar from '../../components/navbar'
-
 const Documentation: NextPage = () => {
   const { params } = useRouter().query
   // console.log('params', params)
 
   switch (params?.length) {
     case 1:
-      return (
-        <div>
-          <Navbar />
-          <h1>Documentation for feature {params[0]}</h1>
-        </div>
-      )
+      return <h1>Documentation for feature {params[0]}</h1>
     case 2:
       return (
-        <div>
-          <Navbar />
-          <h1>
-            Docs for feature {params[0]} and its concept {params[1]}
-          </h1>
-        </div>
+        <h1>
+          Docs for feature {params[0]} and its concept {params[1]}
+        </h1>
       )
     case 3:
       return (
-        <div>
-          <Navbar />
-          <h1>
-            Example {params[2]} of {params[1]} feature in {params[0]} concept
-          </h1>
-        </div>
+        <h1>
+          Example {params[2]} of {params[1]} feature in {params[0]} concept
+        </h1>
       )
     default:
-      return (
-        <div>
-          <Navbar />
-          <h1>Documentation</h1>
-        </div>
-      )
+      return <h1>Documentation</h1>
   }
 }
 

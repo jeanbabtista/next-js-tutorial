@@ -32,6 +32,7 @@ class NavigationUtil {
       this.getSWRUrl(),
       this.getSWRCombinedUrl(),
       this.getCommentsUrl(),
+      this.getImagesUrl(),
     ]
   }
 
@@ -109,6 +110,10 @@ class NavigationUtil {
 
   getCommentsUrl() {
     return this.getReturnType('comments', 'Comments')
+  }
+
+  getImagesUrl() {
+    return this.getReturnType('images', 'Images')
   }
 }
 

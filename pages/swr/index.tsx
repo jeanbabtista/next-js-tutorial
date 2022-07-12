@@ -1,8 +1,6 @@
 import NextError from 'next/error'
 import useSwr from 'swr'
 
-import Navbar from '../../components/navbar'
-
 import { IUser } from '../../types'
 
 const fetcher = async () => {
@@ -18,15 +16,15 @@ const SWR = () => {
   if (!data) return <p>Loading...</p>
 
   return (
-    <div>
-      <Navbar />
+    <>
       <h1>SWR</h1>
+
       <ul>
         {(data as IUser[]).map((user) => (
           <li key={user.id}>{user.name}</li>
         ))}
       </ul>
-    </div>
+    </>
   )
 }
 

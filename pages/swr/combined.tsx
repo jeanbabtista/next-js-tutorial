@@ -2,7 +2,6 @@ import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import { useState } from 'react'
-import Navbar from '../../components/navbar'
 
 import { IUser } from '../../types'
 import NextUtil from '../../utils/NextUtil'
@@ -25,11 +24,12 @@ const Combined: NextPage<ICombinedPageProps> = ({ users }) => {
   }
 
   return (
-    <div>
-      <Navbar />
+    <>
       <h1>Combined</h1>
+
       <input type="text" placeholder="Filter by name ..." onChange={(e) => setState((prev) => ({ ...prev, search: e.target.value }))} />
       <button onClick={handleShareUrl}>Share URL with friends</button>
+
       <ul>
         {state.search
           ? state.users
@@ -37,7 +37,7 @@ const Combined: NextPage<ICombinedPageProps> = ({ users }) => {
               .map((user) => <li key={user.id}>{user.name}</li>)
           : state.users.map((user) => <li key={user.id}>{user.name}</li>)}
       </ul>
-    </div>
+    </>
   )
 }
 

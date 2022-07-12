@@ -160,3 +160,27 @@ Catch-all route - similar to standard catch-all route in Next.js, where we name 
 > Implementation can be found in `pages/comments/[commentId].tsx` page.
 
 You should never call your own Next.js API from within *getStaticProps* or *getServerSideProps* functions, since it introduces another trip in the build, which is not optimal.
+
+---
+
+## Other
+
+- `Styling`: Next.js supports plain CSS, as well as CSS modules, Sass, CSS in JS and styled components.
+
+- `Layout`: App layout is usually defined in the root page component, which is the `_app.tsx` file, and it usually contains the header, footer, and other components. But sometimes we need to create different layouts, which can be done by adding `ComponentName.getLayout` function to the `pages/[ComponentName]` directory.
+
+  > Implementation can be found in `pages/about` page.
+
+- `Misc components`:
+  - Head - allows developers to add meta tags, scripts, and styles to the \<head> element.
+  - Image - Next.js' optimized images. Implementation can be found in `pages/images` page. This component also enables *lazy loading*, which is a technique that allows us to load images only when they are visible on the screen.
+
+- `next export`: This command exports all the HTML pages. With this command, you don't need a server to run the app, but you also cannot use ISR or SSR, only CSR, which is very handy for blogs and landing pages.
+
+- Typescript support
+
+- `Preview mode`: Helps applications that rely on a CMS. For example, if we build an app and publish it on Vercel, and the we start adding content via CMS, we have to rebuild the app (atleast statically generated parts) to reflect the changes. Preview mode is intended to solve this problem. It basically calls *getStaticProps* on every request, even if the app has been already build.
+
+- `Configuration files`:
+  - Redirects - in our *next.config.js* file we can define redirects, which will redirect users from one url to another. This is very useful when a certain url is under development and we don't want to show it to users.
+  - Environment variables - to access environment variables, we have to define them in a file called `.env.local`, and then access them in code with `process.env.MY_VARIABLE`. Next.js automatically populates *process.env* with our environment variables, so we don't have to manually set this up like in Express.js. If we want to expose a variable to the client, we have to name it as `NEXT_PUBLIC_[variableName]`.

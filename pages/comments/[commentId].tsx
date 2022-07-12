@@ -1,14 +1,20 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import { NextPageWithLayout } from '../_app'
 import { IComment } from '../../types'
 import DataUtil from '../../utils/DataUtil'
 import NextUtil from '../../utils/NextUtil'
+import Layout from '../../components/layout'
 
-const Comment: NextPage<{ comment: IComment }> = ({ comment }) => {
+interface ICommentProps {
+  comment: IComment
+}
+
+const Comment: NextPageWithLayout = ({ comment }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div>
+    <>
       <h1>Comment {comment.id}</h1>
       <p>{comment.body}</p>
-    </div>
+    </>
   )
 }
 
@@ -31,5 +37,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!comment) return NextUtil.getStaticProps('comment', { comment: null })
   return NextUtil.getStaticProps('comment', { comment })
 }
+
+Comment.getLayout = (page) => <Layout title={`Comment fetched by id`}>{page}</Layout>
 
 export default Comment

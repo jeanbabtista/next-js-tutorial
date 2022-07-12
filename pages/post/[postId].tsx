@@ -11,10 +11,10 @@ const Post: NextPage<IPostPageProps> = ({ post }) => {
   if (router.isFallback) return <div>Loading...</div>
 
   return (
-    <div>
+    <>
       <h1>{post.title}</h1>
       <p>{post.body}</p>
-    </div>
+    </>
   )
 }
 

@@ -6,12 +6,7 @@
 import Navbar from '../components/navbar'
 
 const ErrorPage = () => {
-  return (
-    <div>
-      <Navbar />
-      <h1>ErrorPage</h1>
-    </div>
-  )
+  return <h1>ErrorPage</h1>
 }
 
 export default ErrorPage

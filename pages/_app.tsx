@@ -1,7 +1,19 @@
+import type { ReactElement, ReactNode } from 'react'
+import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import Layout from '../components/layout'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode
 }
 
-export default MyApp
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>)
+  return getLayout(<Component {...pageProps} />)
+}
+
+export default App

@@ -1,6 +1,5 @@
 import { GetStaticProps, NextPage } from 'next'
 
-import Navbar from '../../components/navbar'
 import User from '../../components/user'
 
 import { IUser, IUsersPageProps } from '../../types'
@@ -9,11 +8,10 @@ import NextUtil from '../../utils/NextUtil'
 
 const Users: NextPage<IUsersPageProps> = ({ users }) => {
   return (
-    <div>
-      <Navbar />
+    <>
       <h1>Users</h1>
       {users.length && users.map((user: IUser) => <User key={user.id} user={user} />)}
-    </div>
+    </>
   )
 }
 

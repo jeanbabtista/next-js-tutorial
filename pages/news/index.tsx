@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Error from 'next/error'
 
 import { useState } from 'react'
-import Navbar from '../../components/navbar'
 
 import { INews, INewsPageProps } from '../../types'
 import NextUtil from '../../utils/NextUtil'
@@ -23,8 +22,7 @@ const News: NextPage<INewsPageProps> = ({ news }) => {
   if (!news) return <Error statusCode={503} title="Unable to fetch news" />
 
   return (
-    <div>
-      <Navbar />
+    <>
       <h1>News</h1>
 
       <form onSubmit={(e) => handleSearchNews(e)}>
@@ -41,7 +39,7 @@ const News: NextPage<INewsPageProps> = ({ news }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   )
 }
 

@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
-import Navbar from '../../components/navbar'
+import { ReactElement, useEffect, useState } from 'react'
+import Layout from '../../components/layout'
+import { NextPageWithLayout } from '../_app'
 
 const sleep = (seconds: number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000))
 
-const Client = () => {
+const Client: NextPageWithLayout = () => {
   const [loading, setLoading] = useState(true)
   const [name, setName] = useState('')
 
@@ -16,12 +17,13 @@ const Client = () => {
     fetchData()
   }, [])
 
-  return (
-    <div>
-      <Navbar />
-      {loading ? <p>Loading...</p> : <p>Hello {name}</p>}
-    </div>
-  )
+  return <>{loading ? <p>Loading...</p> : <p>Hello {name}</p>}</>
 }
+
+Client.getLayout = (page: ReactElement) => (
+  <Layout title="Client" description="Client Page">
+    {page}
+  </Layout>
+)
 
 export default Client
