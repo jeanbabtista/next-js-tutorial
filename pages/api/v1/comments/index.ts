@@ -1,12 +1,7 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import { IComment } from '../../../../types'
 
-let comments: IComment[]
-;(async () => {
-  const response = await fetch(`https://dummyjson.com/comments`)
-  const data = await response.json()
-  comments = data.comments
-})()
+import DataUtil from '../../../../utils/DataUtil'
+import { IComment } from '../../../../types'
 
 interface SuccessResponse {
   comments: IComment[]
@@ -31,7 +26,7 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
 
 const handleGetRequest = async (req: NextApiRequest, res: NextApiResponse<SuccessResponse | FailureResponse>) => {
   try {
-    return res.status(200).json({ comments })
+    return res.status(200).json({ comments: DataUtil.getComments() })
   } catch (error) {
     const e = error as Error
     return res.status(500).json({ error: e.message })
@@ -43,6 +38,7 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse<Succe
     const body: string = req.body.body
     if (!body) return res.status(400).json({ error: 'Body is required' })
 
+    const comments = DataUtil.getComments()
     const comment: IComment = { id: Date.now(), body }
     comments.push(comment)
 
@@ -53,5 +49,4 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse<Succe
   }
 }
 
-export { comments }
 export default handler

@@ -1,11 +1,8 @@
 import { NextApiRequest, NextApiResponse, NextApiHandler } from 'next'
-import { comments } from '.'
-
-const sleep = (seconds: number) => new Promise((resolve) => setTimeout(resolve, seconds * 1000))
+import DataUtil from '../../../../utils/DataUtil'
 
 const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = parseInt(req.query.commentId as string)
-  await sleep(1)
 
   switch (req.method) {
     case 'GET':
@@ -21,6 +18,7 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
 
 const handleGetRequest = async (req: NextApiRequest, res: NextApiResponse, id: number) => {
   try {
+    const comments = DataUtil.getComments()
     const comment = comments.find((c) => c.id === id)
     if (!comment) return res.status(404).json({ error: 'Comment not found' })
 
@@ -33,6 +31,7 @@ const handleGetRequest = async (req: NextApiRequest, res: NextApiResponse, id: n
 
 const handleDeleteRequest = async (req: NextApiRequest, res: NextApiResponse, id: number) => {
   try {
+    const comments = DataUtil.getComments()
     const comment = comments.find((c) => c.id === id)
     if (!comment) return res.status(404).json({ error: 'Error deleting a comment: comment not found' })
 

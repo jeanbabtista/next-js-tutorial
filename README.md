@@ -20,6 +20,7 @@
 | */swr* | SWR hooks from Next.js development team |
 | */swr/combined* | Filtering events using shallow routing and combination of SSR and CSR |
 | */comments* | Comments API based on Next.js integrated API development |
+| */api/v1/* | API v1 |
 
 ---
 
@@ -137,10 +138,25 @@ Let's take filtering as an example. Ideally, we want to filter the data on the c
 
 ## API development
 
+> Implementation can be found in `pages/api/v1` page.
+
 Next.js is a full stack application. It gives you the benefit of developing frontend React apps as well as backend Node.js apps out of the box.
 
 To enable API support, all code must be inside the `pages/api` directory, which automatically serves JSON. Each page must export `handler` function with request and response objects, same as in Express.js framework.
 
 ### Dynamic API routes
 
-Very similar to regular dynamic routes, which are based on files and their hierarchy.
+Very similar to regular dynamic routes, which are based on files and their hierarchy. For example, to perform CRUD operations on `comments` table, we need to create a file inside `api/comments` and name it `[commentId].ts`, and then grab the comment id from `req.query` object inside API function handler.
+
+Catch-all route - similar to standard catch-all route in Next.js, where we name the file with double square brackets and preceded by 3 dots, `[[...params]].ts`, and then we grab the path from `req.url` object. If we put only one set of brackets, it won't be treated the same, since it will not catch the base path */*, because it catches only routes with parameters. That's why, if we don't have an index route, we have to put two sets of brackets around.
+
+| Kind of route | File name | Description |
+| ------------ | -------- | ----------- |
+| Catch-all route | `[...params].ts` | Does not match */*
+| Optional catch-all route | `[[...params]].ts` | Matches every route that is not yet defined
+
+### API pre-rendering
+
+> Implementation can be found in `pages/comments/[commentId].tsx` page.
+
+You should never call your own Next.js API from within *getStaticProps* or *getServerSideProps* functions, since it introduces another trip in the build, which is not optimal.
